@@ -1,0 +1,108 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 0.1.1)'
+        required: true
+        type: string
+      prerelease:
+        description: 'Is this a pre-release?'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: Validate version format
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+        if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(a|b|rc)?[0-9]*$'; then
+          echo "❌ Invalid version format: $VERSION"
+          echo "Version should be in format: X.Y.Z or X.Y.Za1 (for pre-releases)"
+          exit 1
+        fi
+        echo "✅ Version format is valid: $VERSION"
+
+    - name: Update version in setup.py
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+        sed -i.bak "s/version=\"[^\"]*\"/version=\"$VERSION\"/" setup.py
+        rm setup.py.bak
+        echo "Updated setup.py to version $VERSION"
+
+    - name: Update version in pyproject.toml
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+        sed -i.bak "s/^version = \"[^\"]*\"/version = \"$VERSION\"/" pyproject.toml
+        rm pyproject.toml.bak
+        echo "Updated pyproject.toml to version $VERSION"
+
+    - name: Commit version changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add setup.py pyproject.toml
+        git commit -m "Bump version to ${{ github.event.inputs.version }}"
+        git push
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+
+    - name: Build package
+      run: |
+        python -m build
+        ls -lh dist/
+
+    - name: Check package with twine
+      run: |
+        python -m twine check dist/*
+
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        python -m twine upload dist/* --verbose
+
+    - name: Create Git Tag
+      run: |
+        git tag -a v${{ github.event.inputs.version }} -m "Release version ${{ github.event.inputs.version }}"
+        git push origin v${{ github.event.inputs.version }}
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.event.inputs.version }}
+        release_name: Release v${{ github.event.inputs.version }}
+        body: |
+          ## QuantumGridOS v${{ github.event.inputs.version }}
+
+          This release has been published to PyPI.
+
+          **Install:**
+          ```bash
+          pip install quantumgridos==${{ github.event.inputs.version }}
+          ```
+
+          **Documentation:** https://github.com/saralsystems/quantumgridos/blob/main/README.md
+
+          See [CHANGELOG.md](https://github.com/saralsystems/quantumgridos/blob/main/CHANGELOG.md) for details.
+        draft: false
+        prerelease: ${{ github.event.inputs.prerelease }}

@@ -1,0 +1,130 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantumgridos"
+version = "0.1.0"
+description = "Real-time quantum computing interface for power systems optimization"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Saral Systems", email = "contact@saralsystems.com"}
+]
+maintainers = [
+    {name = "Saral Systems", email = "contact@saralsystems.com"}
+]
+keywords = [
+    "quantum computing",
+    "power systems",
+    "optimization",
+    "qaoa",
+    "vqe",
+    "quantum algorithms",
+    "grid computing",
+    "real-time systems"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: System :: Distributed Computing",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "qiskit>=0.43.0",
+    "qiskit-aer>=0.12.0",
+    "qiskit-optimization>=0.5.0",
+    "numpy>=1.21.0",
+    "scipy>=1.7.0",
+    "pandas>=1.3.0",
+    "networkx>=2.6.0",
+    "pandapower>=2.10.0",
+    "asyncio-mqtt>=0.12.0",
+    "aiofiles>=0.8.0",
+    "msgpack>=1.0.0",
+    "protobuf>=3.19.0",
+    "structlog>=21.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "pytest-asyncio>=0.18.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+    "sphinx>=4.5.0",
+    "sphinx-rtd-theme>=1.0.0",
+]
+visualization = [
+    "matplotlib>=3.5.0",
+    "plotly>=5.0.0",
+    "seaborn>=0.11.0",
+]
+hardware = [
+    "qiskit-ibmq-provider>=0.19.0",
+    "pyquil>=3.0.0",
+    "amazon-braket-sdk>=1.35.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/saralsystems/quantumgridos"
+Documentation = "https://quantumgridos.readthedocs.io"
+Repository = "https://github.com/saralsystems/quantumgridos"
+"Bug Tracker" = "https://github.com/saralsystems/quantumgridos/issues"
+
+[project.scripts]
+quantumgridos = "quantumgridos.cli:main"
+qgo = "quantumgridos.cli:main"
+
+[tool.setuptools]
+packages = ["quantumgridos"]
+
+[tool.setuptools.package-data]
+quantumgridos = ["data/*.json", "data/*.csv"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests",
+]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
