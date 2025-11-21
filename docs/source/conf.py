@@ -11,8 +11,8 @@ sys.path.insert(0, os.path.abspath('../../'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'QuantumGridOS'
-copyright = '2025, Saral Systems'
-author = 'Saral Systems'
+copyright = '2025, SARAL Systems'
+author = 'SARAL Systems'
 release = '0.1.0'
 version = '0.1.0'
 
@@ -76,6 +76,11 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
+# Custom CSS files
+html_css_files = [
+    'custom.css',
+]
+
 html_theme_options = {
     'logo_only': False,
     'display_version': True,
@@ -96,6 +101,10 @@ html_context = {
     "github_repo": "quantumgridos",
     "github_version": "main",
     "conf_py_path": "/docs/source/",
+    "creator": "SARAL Systems",
+    "creator_url": "https://saralsystems.co",
+    "project_url": "https://quantumgridos.com",
+    "support_email": "contact@saralsystems.co",
 }
 
 html_title = f"{project} v{version}"
@@ -131,7 +140,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto, manual, or own class]).
 latex_documents = [
     ('index', 'quantumgridos.tex', 'QuantumGridOS Documentation',
-     'Saral Systems', 'manual'),
+     'SARAL Systems', 'manual'),
 ]
 
 # -- Options for manual page output ------------------------------------------

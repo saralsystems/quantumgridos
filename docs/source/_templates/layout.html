@@ -1,0 +1,40 @@
+{% extends "!layout.html" %}
+
+{# Custom navbar #}
+{% block document %}
+<div class="custom-navbar">
+    <a href="https://quantumgridos.com" class="custom-navbar-brand" target="_blank">
+        ⚡ QuantumGridOS
+    </a>
+    <div class="custom-navbar-links">
+        <a href="https://quantumgridos.com" class="custom-navbar-link" target="_blank">Home</a>
+        <a href="https://saralsystems.co" class="custom-navbar-link" target="_blank">SARAL Systems</a>
+        <a href="https://github.com/saralsystems/quantumgridos" class="custom-navbar-link" target="_blank">GitHub</a>
+        <a href="mailto:contact@saralsystems.co" class="custom-navbar-link">Contact</a>
+    </div>
+</div>
+{{ super() }}
+{% endblock %}
+
+{# Custom footer with attribution #}
+{% block footer %}
+{{ super() }}
+<div class="footer-attribution">
+    <p class="footer-logo">⚡ QuantumGridOS</p>
+    <p>
+        <strong>Developed by <a href="https://saralsystems.co" target="_blank">SARAL Systems</a></strong>
+    </p>
+    <p>
+        Real-time quantum computing interface for power systems optimization
+    </p>
+    <p>
+        For support and inquiries: <a href="mailto:contact@saralsystems.co">contact@saralsystems.co</a>
+    </p>
+    <p style="margin-top: 10px; font-size: 0.9em; color: #777;">
+        © {{ copyright }} | 
+        <a href="https://quantumgridos.com" target="_blank">quantumgridos.com</a> | 
+        <a href="https://github.com/saralsystems/quantumgridos" target="_blank">GitHub</a> |
+        <a href="https://github.com/saralsystems/quantumgridos/blob/main/LICENSE" target="_blank">Apache 2.0 License</a>
+    </p>
+</div>
+{% endblock %}

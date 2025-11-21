@@ -1,0 +1,111 @@
+/* Custom navbar styling for QuantumGridOS documentation */
+
+/* Top navbar */
+.custom-navbar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.custom-navbar-brand {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3498db;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.custom-navbar-brand:hover {
+    color: #5dade2;
+}
+
+.custom-navbar-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.custom-navbar-link {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.custom-navbar-link:hover {
+    background-color: #34495e;
+    color: #3498db;
+}
+
+/* Adjust main content to account for fixed navbar */
+.wy-nav-content-wrap {
+    margin-top: 50px;
+}
+
+.wy-nav-side {
+    top: 50px;
+    height: calc(100% - 50px);
+}
+
+/* Custom footer attribution */
+.footer-attribution {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 40px;
+}
+
+.footer-attribution p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.footer-attribution a {
+    color: #2980B9;
+    text-decoration: none;
+}
+
+.footer-attribution a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .custom-navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .custom-navbar-links {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .wy-nav-content-wrap {
+        margin-top: 100px;
+    }
+    
+    .wy-nav-side {
+        top: 100px;
+        height: calc(100% - 100px);
+    }
+}
