@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-latest-orange)](https://quantumgridos.readthedocs.io)
+[![Documentation](https://img.shields.io/badge/docs-latest-orange)](https://saralsystems.github.io/quantumgridos/)
 
 **QuantumGridOS** is a high-performance Python library for real-time integration between quantum computers and power systems. It enables solving power system optimization problems using quantum algorithms (QAOA, VQE) with minimal latency TCP/IP data exchange.
 
@@ -150,13 +150,13 @@ QuantumGridOS uses optimized binary protocol for minimal latency:
 
 ## 📚 Documentation
 
-Full documentation available at [quantumgridos.readthedocs.io](https://quantumgridos.readthedocs.io)
+Full documentation available at [saralsystems.github.io/quantumgridos](https://saralsystems.github.io/quantumgridos/)
 
-- [Getting Started Guide](docs/getting_started.md)
-- [API Reference](docs/api_reference.md)
-- [Power Systems Tutorial](docs/power_systems.md)
-- [Quantum Algorithms Guide](docs/quantum_algorithms.md)
-- [Performance Tuning](docs/performance.md)
+- [Getting Started Guide](https://saralsystems.github.io/quantumgridos/installation.html)
+- [Quick Start](https://saralsystems.github.io/quantumgridos/quickstart.html)
+- [API Reference](https://saralsystems.github.io/quantumgridos/api/core.html)
+- [User Guide](https://saralsystems.github.io/quantumgridos/user_guide/index.html)
+- [Tutorials](https://saralsystems.github.io/quantumgridos/tutorials/index.html)
 
 ## 🧪 Testing
 
