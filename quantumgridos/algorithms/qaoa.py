@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import networkx as nx
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit import Parameter
-from qiskit_algorithms import QAOA as QiskitQAOA
+from qiskit_algorithms import QAOA as QiskitQAOA, SamplingVQE
 from qiskit_algorithms.optimizers import COBYLA, SPSA, ADAM
 from qiskit.primitives import StatevectorSampler as Sampler
 from qiskit_aer import AerSimulator
@@ -220,16 +220,17 @@ class PowerSystemQAOA:
                 # Random initialization
                 initial_params = np.random.uniform(0, 2 * np.pi, 2 * self.config.layers)
 
-        # Create QAOA instance
-        qaoa = QiskitQAOA(
+        # Create VQE instance with custom ansatz (the QAOA circuit)
+        # We use SamplingVQE to avoid QiskitQAOA's default ansatz which causes sparse warnings
+        vqe = SamplingVQE(
             sampler=self.sampler,
+            ansatz=circuit,
             optimizer=optimizer,
-            reps=self.config.layers,
             initial_point=initial_params,
         )
 
         # Run optimization
-        result = qaoa.compute_minimum_eigenvalue(hamiltonian)
+        result = vqe.compute_minimum_eigenvalue(hamiltonian)
 
         # Cache results
         self._cache_results(hamiltonian, result.optimal_point, result.eigenvalue)
