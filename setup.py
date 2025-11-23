@@ -12,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="quantumgridos",
-    version="0.1.0",
+    version="0.1.1",
     author="Saral Systems",
     author_email="contact@saralsystems.com",
     description="Real-time quantum computing interface for power systems optimization",
@@ -54,7 +54,7 @@ setup(
             "seaborn>=0.11.0",
         ],
         "hardware": [
-            "qiskit-ibmq-provider>=0.19.0",
+            "qiskit-ibm-runtime>=0.14.0",
             "pyquil>=3.0.0",
             "amazon-braket-sdk>=1.35.0",
         ],

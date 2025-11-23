@@ -12,9 +12,9 @@ import numpy as np
 
 # Quantum provider imports
 try:
-    from qiskit import IBMQ, QuantumCircuit, execute
-    from qiskit.providers.ibmq import IBMQBackend
+    from qiskit import QuantumCircuit
     from qiskit_ibm_runtime import QiskitRuntimeService, Sampler, Estimator
+    from qiskit_aer.primitives import Sampler as AerSampler
 
     HAS_IBM = True
 except ImportError:
@@ -137,35 +137,24 @@ class QuantumBackendManager:
 
             # Get backend
             backend_name = self.config.backend_name or "ibmq_qasm_simulator"
-            self.backend = self.provider_session.get_backend(backend_name)
+            self.backend = self.provider_session.backend(backend_name)
 
             logger.info(f"Connected to IBM Quantum Runtime: {backend_name}")
             logger.info(f"Backend config: {self.backend.configuration().n_qubits} qubits")
 
         else:
-            # Use standard IBMQ
-            IBMQ.save_account(token, overwrite=True)
-            provider = IBMQ.load_account()
-
-            if self.config.hub and self.config.group and self.config.project:
-                provider = IBMQ.get_provider(
-                    hub=self.config.hub, group=self.config.group, project=self.config.project
-                )
-
-            # Get least busy backend if not specified
-            if not self.config.backend_name:
-                from qiskit.providers.ibmq import least_busy
-
-                backends = provider.backends(
-                    filters=lambda x: x.configuration().n_qubits >= 5
-                    and not x.configuration().simulator
-                    and x.status().operational
-                )
-                self.backend = least_busy(backends)
-                logger.info(f"Selected least busy backend: {self.backend.name()}")
+            # Fallback to Runtime Service but without specific runtime features if needed
+            # For now, we enforce Runtime as IBMQ is deprecated
+            logger.warning("Legacy IBMQ provider is deprecated. Using QiskitRuntimeService.")
+            self.provider_session = QiskitRuntimeService(token=token, channel="ibm_quantum")
+            
+            if self.config.backend_name:
+                 self.backend = self.provider_session.backend(self.config.backend_name)
             else:
-                self.backend = provider.get_backend(self.config.backend_name)
-                logger.info(f"Connected to IBM backend: {self.config.backend_name}")
+                 # Simple least busy logic using runtime service
+                 self.backend = self.provider_session.least_busy(simulator=False, operational=True)
+            
+            logger.info(f"Connected to IBM backend: {self.backend.name}")
 
     def _init_rigetti(self):
         """Initialize Rigetti quantum computer"""
@@ -237,9 +226,9 @@ class QuantumBackendManager:
     def _init_simulator(self):
         """Initialize local simulator"""
         if HAS_IBM:
-            from qiskit import Aer
+            from qiskit_aer import AerSimulator
 
-            self.backend = Aer.get_backend("aer_simulator")
+            self.backend = AerSimulator()
             logger.info("Using Qiskit Aer simulator")
         else:
             logger.warning("No quantum libraries installed, using mock backend")
@@ -274,18 +263,19 @@ class QuantumBackendManager:
 
         if self.config.use_runtime and self.provider_session:
             # Use Runtime Sampler for better performance
-            with self.provider_session.get_backend(self.backend.name).open_session() as session:
+            with self.provider_session.backend(self.backend.name).open_session() as session:
                 sampler = Sampler(
                     session=session,
                     options={"shots": shots, "resilience_level": self.config.resilience_level},
                 )
 
-                job = sampler.run(circuit)
+                job = sampler.run([circuit])
                 result = job.result()
 
                 # Convert to standard format
                 counts = {}
-                for outcome, prob in enumerate(result.quasi_dists[0]):
+                # Handle quasi-probabilities from Sampler
+                for outcome, prob in result.quasi_dists[0].items():
                     if prob > 0:
                         bitstring = format(outcome, f"0{circuit.num_qubits}b")
                         counts[bitstring] = int(prob * shots)
@@ -297,23 +287,30 @@ class QuantumBackendManager:
                     "success": True,
                 }
         else:
-            # Standard execution
-            job = execute(
-                circuit,
-                self.backend,
-                shots=shots,
-                optimization_level=self.config.optimization_level,
-            )
-            result = job.result()
-
-            return {
-                "counts": result.get_counts(),
+             # Use local primitives if not using runtime session (or as fallback)
+             # Note: This path might need adjustment depending on exact non-runtime usage
+             # For now, assuming we want to run on the backend object directly if it supports run()
+             # But IBM Runtime backends don't support direct run() for circuits in the same way as old backends
+             # So we should default to using the Sampler primitive with the backend
+             
+             sampler = Sampler(backend=self.backend)
+             job = sampler.run([circuit], shots=shots)
+             result = job.result()
+             
+             counts = {}
+             for outcome, prob in result.quasi_dists[0].items():
+                    if prob > 0:
+                        bitstring = format(outcome, f"0{circuit.num_qubits}b")
+                        counts[bitstring] = int(prob * shots)
+                        
+             return {
+                "counts": counts,
                 "shots": shots,
-                "backend": self.backend.name(),
-                "success": result.success,
-            }
+                "backend": self.backend.name,
+                "success": True,
+             }
 
-    def _execute_rigetti(self, program: Program, **kwargs) -> Dict:
+    def _execute_rigetti(self, program: "Program", **kwargs) -> Dict:
         """Execute on Rigetti"""
 
         shots = kwargs.get("shots", self.config.shots)
@@ -330,7 +327,7 @@ class QuantumBackendManager:
 
         return {"counts": counts, "shots": shots, "backend": str(self.backend), "success": True}
 
-    def _execute_ionq(self, circuit: cirq.Circuit, **kwargs) -> Dict:
+    def _execute_ionq(self, circuit: "cirq.Circuit", **kwargs) -> Dict:
         """Execute on IonQ"""
 
         shots = kwargs.get("shots", self.config.shots)
@@ -343,7 +340,7 @@ class QuantumBackendManager:
 
         return {"counts": counts, "shots": shots, "backend": self.backend_name, "success": True}
 
-    def _execute_braket(self, circuit: BraketCircuit, **kwargs) -> Dict:
+    def _execute_braket(self, circuit: "BraketCircuit", **kwargs) -> Dict:
         """Execute on AWS Braket"""
 
         shots = kwargs.get("shots", self.config.shots)
@@ -361,7 +358,23 @@ class QuantumBackendManager:
         """Execute on simulator"""
 
         if HAS_IBM and isinstance(circuit, QuantumCircuit):
-            return self._execute_ibm(circuit, **kwargs)
+            # Use Aer Sampler
+            sampler = AerSampler(backend_options={"method": "automatic"}, run_options={"shots": kwargs.get("shots", 1024)})
+            job = sampler.run([circuit])
+            result = job.result()
+            
+            counts = {}
+            for outcome, prob in result.quasi_dists[0].items():
+                if prob > 0:
+                    bitstring = format(outcome, f"0{circuit.num_qubits}b")
+                    counts[bitstring] = int(prob * kwargs.get("shots", 1024))
+            
+            return {
+                "counts": counts,
+                "shots": kwargs.get("shots", 1024),
+                "backend": "aer_simulator",
+                "success": True
+            }
         else:
             # Mock execution
             return self.backend.execute(circuit, **kwargs)

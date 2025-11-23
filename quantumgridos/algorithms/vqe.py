@@ -9,10 +9,10 @@ from dataclasses import dataclass
 import scipy.optimize as opt
 from qiskit import QuantumCircuit
 from qiskit.circuit import ParameterVector
-from qiskit.algorithms import VQE as QiskitVQE
-from qiskit.algorithms.optimizers import SLSQP, L_BFGS_B, COBYLA
+from qiskit_algorithms import VQE as QiskitVQE
+from qiskit_algorithms.optimizers import SLSQP, L_BFGS_B, COBYLA
 from qiskit.circuit.library import TwoLocal, RealAmplitudes, EfficientSU2
-from qiskit.primitives import Estimator
+from qiskit_aer.primitives import Estimator
 from qiskit.quantum_info import SparsePauliOp
 from qiskit_aer import AerSimulator
 import logging
@@ -292,7 +292,7 @@ class PowerSystemVQE:
         opt_params, min_cost, info = self.optimize(hamiltonian, ansatz)
 
         # Sample optimized circuit to get solution
-        optimized_circuit = ansatz.bind_parameters(opt_params)
+        optimized_circuit = ansatz.assign_parameters(opt_params)
         optimized_circuit.measure_all()
 
         job = self.backend.run(optimized_circuit, shots=1024)
@@ -356,7 +356,7 @@ class PowerSystemVQE:
         opt_params, min_residual, info = self.optimize(hamiltonian, ansatz)
 
         # Extract state estimate
-        optimized_circuit = ansatz.bind_parameters(opt_params)
+        optimized_circuit = ansatz.assign_parameters(opt_params)
         optimized_circuit.measure_all()
 
         job = self.backend.run(optimized_circuit, shots=2048)

@@ -11,7 +11,7 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit import Parameter
 from qiskit_algorithms import QAOA as QiskitQAOA
 from qiskit_algorithms.optimizers import COBYLA, SPSA, ADAM
-from qiskit.primitives import Sampler
+from qiskit.primitives import StatevectorSampler as Sampler
 from qiskit_aer import AerSimulator
 from qiskit.quantum_info import SparsePauliOp
 import logging
@@ -54,6 +54,10 @@ class PowerSystemQAOA:
             Hamiltonian as SparsePauliOp
         """
         n_qubits = graph.number_of_nodes()
+        
+        # Create mapping from node IDs to qubit indices (0-indexed)
+        node_to_qubit = {node: idx for idx, node in enumerate(sorted(graph.nodes()))}
+        
         pauli_list = []
 
         # For each edge, add ZZ interaction
@@ -62,8 +66,8 @@ class PowerSystemQAOA:
 
             # Create Pauli string with Z on qubits u and v
             pauli_str = ["I"] * n_qubits
-            pauli_str[u] = "Z"
-            pauli_str[v] = "Z"
+            pauli_str[node_to_qubit[u]] = "Z"
+            pauli_str[node_to_qubit[v]] = "Z"
 
             # MaxCut: minimize agreement (maximize disagreement)
             pauli_list.append(("".join(pauli_str), weight / 2))
@@ -354,7 +358,7 @@ class PowerSystemQAOA:
                 if p.name == name:
                     param_dict[p] = value
 
-        bound_circuit = circuit.bind_parameters(param_dict)
+        bound_circuit = circuit.assign_parameters(param_dict)
 
         # Run circuit
         job = self.backend.run(bound_circuit, shots=self.config.shots)
