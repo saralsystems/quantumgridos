@@ -1,0 +1,43 @@
+name: Cross-Platform Verification
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    name: Build and Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install build pytest
+
+    - name: Build package
+      run: python -m build
+
+    - name: Install package
+      run: pip install .
+
+    - name: Verify imports
+      run: |
+        python -c "import quantumgridos; print(f'Successfully imported quantumgridos version {quantumgridos.__version__}')"
+        python -c "import quantumgridos.core"
+        python -c "import quantumgridos.algorithms"
+        python -c "import quantumgridos.power_systems"

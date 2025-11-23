@@ -4,7 +4,11 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-latest-orange)](https://saralsystems.github.io/quantumgridos/)
 
-**QuantumGridOS** is a high-performance Python library for real-time integration between quantum computers and power systems. It enables solving power system optimization problems using quantum algorithms (QAOA, VQE) with minimal latency TCP/IP data exchange.
+**QuantumGridOS** is a Python library for connecting power systems data to quantum computers.
+> [!IMPORTANT]
+> This library currently supports Python 3.8 to 3.11. Python 3.12+ is not yet supported.
+
+It enables solving power system optimization problems using quantum algorithms (QAOA, VQE) with minimal latency TCP/IP data exchange.
 
 ## 🚀 Features
 
