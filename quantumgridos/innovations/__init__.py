@@ -4,13 +4,13 @@ from .mathematical_innovations import (
     QuantumPowerSystemEigenvalue,
     QuantumMultiContingencyAnalysis,
     NoiseAdaptiveGridQAOA,
-    QuantumPowerInnovations
+    QuantumPowerInnovations,
 )
 
 __all__ = [
-    'PowerFlowPreservingEncoding',
-    'QuantumPowerSystemEigenvalue',
-    'QuantumMultiContingencyAnalysis',
-    'NoiseAdaptiveGridQAOA',
-    'QuantumPowerInnovations'
+    "PowerFlowPreservingEncoding",
+    "QuantumPowerSystemEigenvalue",
+    "QuantumMultiContingencyAnalysis",
+    "NoiseAdaptiveGridQAOA",
+    "QuantumPowerInnovations",
 ]

@@ -5,40 +5,41 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
+
+sys.path.insert(0, os.path.abspath("../../"))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'QuantumGridOS'
-copyright = '2025, SARAL Systems'
-author = 'SARAL Systems'
-release = '0.1.0'
-version = '0.1.0'
+project = "QuantumGridOS"
+copyright = "2025, SARAL Systems"
+author = "SARAL Systems"
+release = "0.1.0"
+version = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages',
-    'sphinx_rtd_theme',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.githubpages",
+    "sphinx_rtd_theme",
 ]
 
 # AutoDoc settings
 autodoc_default_options = {
-    'members': True,
-    'member-order': 'bysource',
-    'special-members': '__init__',
-    'undoc-members': True,
-    'exclude-members': '__weakref__'
+    "members": True,
+    "member-order": "bysource",
+    "special-members": "__init__",
+    "undoc-members": True,
+    "exclude-members": "__weakref__",
 }
 
 autosummary_generate = True
@@ -61,38 +62,38 @@ napoleon_attr_annotations = True
 
 # Intersphinx mapping
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', None),
-    'numpy': ('https://numpy.org/doc/stable/', None),
-    'scipy': ('https://docs.scipy.org/doc/scipy/', None),
-    'qiskit': ('https://qiskit.org/documentation/', None),
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
+    "qiskit": ("https://qiskit.org/documentation/", None),
 }
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_theme = "sphinx_rtd_theme"
+html_static_path = ["_static"]
 
 # Custom CSS files
 html_css_files = [
-    'custom.css',
+    "custom.css",
 ]
 
 html_theme_options = {
-    'logo_only': False,
-    'display_version': True,
-    'prev_next_buttons_location': 'bottom',
-    'style_external_links': False,
-    'style_nav_header_background': '#2980B9',
+    "logo_only": False,
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": False,
+    "style_nav_header_background": "#2980B9",
     # Toc options
-    'collapse_navigation': False,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "navigation_depth": 4,
+    "includehidden": True,
+    "titles_only": False,
 }
 
 html_context = {
@@ -130,27 +131,23 @@ add_module_names = True
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
-    'papersize': 'letterpaper',
-    'pointsize': '10pt',
-    'preamble': '',
-    'figure_align': 'htbp',
+    "papersize": "letterpaper",
+    "pointsize": "10pt",
+    "preamble": "",
+    "figure_align": "htbp",
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    ('index', 'quantumgridos.tex', 'QuantumGridOS Documentation',
-     'SARAL Systems', 'manual'),
+    ("index", "quantumgridos.tex", "QuantumGridOS Documentation", "SARAL Systems", "manual"),
 ]
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'quantumgridos', 'QuantumGridOS Documentation',
-     [author], 1)
-]
+man_pages = [("index", "quantumgridos", "QuantumGridOS Documentation", [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -158,9 +155,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'quantumgridos', 'QuantumGridOS Documentation',
-     author, 'QuantumGridOS', 'Real-time quantum computing interface for power systems optimization.',
-     'Miscellaneous'),
+    (
+        "index",
+        "quantumgridos",
+        "QuantumGridOS Documentation",
+        author,
+        "QuantumGridOS",
+        "Real-time quantum computing interface for power systems optimization.",
+        "Miscellaneous",
+    ),
 ]
 
 # -- Extension configuration -------------------------------------------------

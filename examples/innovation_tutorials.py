@@ -13,21 +13,23 @@ from quantumgridos import *
 # TUTORIAL 1: Kirchhoff-Preserving Quantum Encoding
 # ==============================================================================
 
+
 class KirchhoffPreservingTutorial:
     """
     Complete tutorial for implementing physics-preserving quantum states
     """
-    
+
     @staticmethod
     def tutorial():
         """
         Step-by-step guide to Kirchhoff-preserving encoding
         """
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("TUTORIAL 1: KIRCHHOFF-PRESERVING QUANTUM ENCODING")
-        print("="*70)
-        
-        print("""
+        print("=" * 70)
+
+        print(
+            """
 This innovation ensures that EVERY quantum state in your optimization
 represents a physically valid power flow. No post-processing needed!
 
@@ -38,12 +40,14 @@ Traditional quantum encoding can create states that violate physics:
 
 Our encoding guarantees physical validity:
   |ψ⟩ = α|valid_flow_1⟩ + β|valid_flow_2⟩  ✓
-        """)
-        
+        """
+        )
+
         # Step 1: Create Network
         print("\n📝 STEP 1: Create Your Power Network")
         print("-" * 40)
-        print("""
+        print(
+            """
 from quantumgridos import PowerNetwork, Bus, Line, Generator
 
 # Create simple 4-bus network
@@ -67,12 +71,14 @@ network.add_generator(Generator(1, 1, "Main_Gen", 0, 100, 20))
 # Add loads
 network.add_load(2, 30, 10)  # 30MW at bus 2
 network.add_load(3, 20, 8)   # 20MW at bus 3
-        """)
-        
+        """
+        )
+
         # Step 2: Initialize Encoder
         print("\n📝 STEP 2: Initialize Kirchhoff-Preserving Encoder")
         print("-" * 40)
-        print("""
+        print(
+            """
 from quantumgridos.innovations import PowerFlowPreservingEncoding
 
 # Create encoder
@@ -82,12 +88,14 @@ encoder = PowerFlowPreservingEncoding(network)
 # 1. Analyzes network topology
 # 2. Identifies power balance constraints
 # 3. Prepares KPL-preserving gates
-        """)
-        
+        """
+        )
+
         # Step 3: Build Quantum Circuit
         print("\n📝 STEP 3: Build Physics-Preserving Circuit")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Create quantum circuit with physics preservation
 circuit = encoder.create_kirchhoff_preserving_circuit()
 
@@ -97,12 +105,14 @@ print(f"Circuit depth: {circuit.depth()}")
 # Key feature: EVERY gate preserves power balance!
 # The circuit structure ensures:
 #   ∑P_in = ∑P_out at every quantum evolution step
-        """)
-        
+        """
+        )
+
         # Step 4: Understanding the Math
         print("\n📝 STEP 4: Mathematical Foundation")
         print("-" * 40)
-        print("""
+        print(
+            """
 The Kirchhoff Power Law (KPL) preserving gate has matrix form:
 
         U_KPL = exp(-iH_constraint * t)
@@ -119,12 +129,14 @@ The unitary U_KPL has special eigenspaces:
   • Infeasible eigenspace: Zero amplitude
 
 This means infeasible states naturally disappear!
-        """)
-        
+        """
+        )
+
         # Step 5: Practical Example
         print("\n📝 STEP 5: Practical Example - Microgrid Islanding")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Scenario: Microgrid transitioning to island mode
 # Problem: Maintain power balance during transition
 
@@ -144,12 +156,14 @@ result = encoder.optimize_islanding_transition(
 #   ✓ Power balance at every microsecond
 #   ✓ No transient violations
 #   ✓ Smooth frequency transition
-        """)
-        
+        """
+        )
+
         # Step 6: Verification
         print("\n📝 STEP 6: Verify Physics Preservation")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Generate random quantum state
 n_qubits = circuit.num_qubits
 random_state = np.random.randn(2**n_qubits) + 1j*np.random.randn(2**n_qubits)
@@ -168,12 +182,14 @@ if decoded:
     print(f"Power balance error: {balance:.6f} MW")  # Will be ~0
     print(f"KCL satisfied: {balance < 0.001}")       # True
     print(f"Voltage in bounds: {all(0.9 <= v <= 1.1 for v in decoded['voltages'])}")  # True
-        """)
-        
+        """
+        )
+
         # Advanced Topics
         print("\n📝 ADVANCED: Custom Constraints")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Add custom operational constraints
 
 # Example: Renewable curtailment limit
@@ -189,38 +205,43 @@ encoder.add_constraint(
 )
 
 # These constraints are automatically incorporated into U_KPL!
-        """)
-        
+        """
+        )
+
         print("\n✅ KEY TAKEAWAYS:")
         print("-" * 40)
-        print("""
+        print(
+            """
 1. EVERY quantum state represents valid power flow
 2. No post-processing needed - physics built into quantum evolution
 3. Transient states also satisfy constraints
 4. Works with any quantum optimization algorithm (QAOA, VQE, etc.)
 5. First-ever guarantee of physical feasibility in quantum optimization
-        """)
+        """
+        )
 
 
 # ==============================================================================
 # TUTORIAL 2: Quantum Eigenvalue for Power Systems
 # ==============================================================================
 
+
 class QuantumEigenvalueTutorial:
     """
     Tutorial for quantum eigenvalue analysis of power grids
     """
-    
+
     @staticmethod
     def tutorial():
         """
         Step-by-step guide to quantum eigenvalue analysis
         """
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("TUTORIAL 2: QUANTUM EIGENVALUE ANALYSIS (QPSEA)")
-        print("="*70)
-        
-        print("""
+        print("=" * 70)
+
+        print(
+            """
 This innovation finds critical eigenvalues of power system matrices
 exponentially faster by exploiting grid topology (sparse, near-planar).
 
@@ -230,11 +251,13 @@ Classical eigenvalue: O(n³) operations
 Quantum eigenvalue: O(log n × precision) operations
 
 For 1000-bus system: 1,000,000,000 vs 10,000 operations!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 1: Understanding Y-bus Structure")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Power system Y-bus matrices are SPECIAL:
 #   • Sparse: Each bus connects to 2-4 others
 #   • Symmetric: Y_ij = Y_ji for passive elements
@@ -249,11 +272,13 @@ sparsity = 100 * (1 - np.count_nonzero(ybus) / ybus.size)
 print(f"Sparsity: {sparsity:.1f}%")  # Typically 95-98%
 
 # This sparsity is KEY to our quantum advantage!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 2: Initialize Quantum Eigenvalue Solver")
         print("-" * 40)
-        print("""
+        print(
+            """
 from quantumgridos.innovations import QuantumPowerSystemEigenvalue
 
 # Create solver
@@ -263,11 +288,13 @@ solver = QuantumPowerSystemEigenvalue(network)
 #   1. Analyzes network topology
 #   2. Identifies electrical communities
 #   3. Optimizes Trotter decomposition
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 3: Build Eigenvalue Circuit")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Create quantum circuit for eigenvalue finding
 # Precision bits determine eigenvalue resolution
 
@@ -282,11 +309,13 @@ print(f"Circuit depth: {circuit.depth()}")
 #   1. Quantum Phase Estimation (QPE)
 #   2. Sparse matrix evolution
 #   3. Critical mode amplification
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 4: Mathematical Innovation")
         print("-" * 40)
-        print("""
+        print(
+            """
 KEY INNOVATION: Electrical Distance Trotter Decomposition
 
 Traditional Trotter: Based on physical distance
@@ -306,11 +335,13 @@ U(t) = exp(-iYt)
      ≈ exp(-iY_local*t) × exp(-iY_neighbor*t) × exp(-iY_remote*t)
      
 # Each term is efficiently implementable on quantum computer
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 5: Find Critical Eigenvalues")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Execute quantum circuit (simulated)
 results = solver.run_eigenvalue_analysis()
 
@@ -336,11 +367,13 @@ for i, eig in enumerate(eigenvalues[:5]):
         
         if damping < 0.03:
             print("  ⚠️ WARNING: Poor damping!")
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 6: Practical Application - Inverter Stability")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Real scenario: Solar farm with 20 inverters
 # Problem: Find oscillatory modes
 
@@ -363,11 +396,13 @@ for mode in results['critical_modes']:
         print(f"Inverter oscillation at {mode['frequency']} Hz")
         print(f"Participating inverters: {mode['participants']}")
         print(f"Recommended action: Retune control parameters")
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 7: Performance Comparison")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Benchmark quantum vs classical
 
 import time
@@ -389,38 +424,43 @@ print(f"Speedup: {classical_time/quantum_time:.1f}×")
 # For large systems (>1000 buses):
 # Classical: O(n³) → hours
 # Quantum: O(log n) → seconds
-        """)
-        
+        """
+        )
+
         print("\n✅ KEY TAKEAWAYS:")
         print("-" * 40)
-        print("""
+        print(
+            """
 1. Exploits power grid sparsity for exponential speedup
 2. Finds stability-critical eigenvalues first
 3. Electrical distance > physical distance for decomposition
 4. Enables real-time stability assessment
 5. Scales to continental-size grids (10,000+ buses)
-        """)
+        """
+        )
 
 
 # ==============================================================================
 # TUTORIAL 3: Quantum Multi-Contingency Analysis
 # ==============================================================================
 
+
 class QuantumContingencyTutorial:
     """
     Tutorial for quantum multi-contingency analysis
     """
-    
+
     @staticmethod
     def tutorial():
         """
         Step-by-step guide to quantum contingency analysis
         """
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("TUTORIAL 3: QUANTUM MULTI-CONTINGENCY ANALYSIS")
-        print("="*70)
-        
-        print("""
+        print("=" * 70)
+
+        print(
+            """
 This innovation evaluates ALL possible contingency combinations
 simultaneously using quantum superposition.
 
@@ -430,11 +470,13 @@ Classical N-2: Check n×(n-1)/2 combinations sequentially
 Quantum N-2: Check ALL combinations in parallel
 
 For 50 elements: 1,225 sequential vs 1 parallel evaluation!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 1: Understanding Contingency Analysis")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Contingency = Equipment outage (planned or forced)
 # N-1: Single outage
 # N-2: Two simultaneous outages  
@@ -449,11 +491,13 @@ from quantumgridos.innovations import QuantumMultiContingencyAnalysis
 network = PowerNetwork.from_ieee_case(14)
 
 analyzer = QuantumMultiContingencyAnalysis(network)
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 2: Creating Superposition of Outages")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Key innovation: Dicke state preparation
 # Creates superposition with EXACTLY k outages
 
@@ -469,11 +513,13 @@ circuit = analyzer.create_contingency_circuit(k=2)
 print(f"Analyzing {analyzer.n_lines} lines")
 print(f"N-{k} contingencies")
 print(f"Total combinations in superposition: {n_choose_k(n_lines, k)}")
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 3: Parallel Power Flow Evaluation")
         print("-" * 40)
-        print("""
+        print(
+            """
 # For EACH outage pattern in superposition,
 # we evaluate power flow consequences IN PARALLEL
 
@@ -491,11 +537,13 @@ print(f"Total combinations in superposition: {n_choose_k(n_lines, k)}")
 for line_idx in range(analyzer.n_lines):
     controlled_flow = analyzer._controlled_power_flow_update(line_idx)
     circuit.append(controlled_flow, qubits)
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 4: Severity Scoring Oracle")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Quantum oracle evaluates severity of each contingency
 # Severity factors:
 #   1. Voltage violations
@@ -521,11 +569,13 @@ def severity_oracle(state):
     return severity
 
 # This oracle runs on ALL combinations simultaneously!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 5: Amplifying Critical Scenarios")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Grover's algorithm amplifies high-severity scenarios
 # After amplification, critical contingencies have higher probability
 
@@ -536,11 +586,13 @@ for _ in range(n_iterations):
     circuit.append(grover_operator, all_qubits)
 
 # Result: Critical scenarios are ~√n times more likely to be measured
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 6: Real-World Example - Cascading Failure")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Scenario: Find hidden N-3 cascading failures
 
 # These are EXTREMELY dangerous:
@@ -569,11 +621,13 @@ print("Impact: Splits network into islands")
 print("Cascading risk: HIGH")
 print("Probability: 0.003 (3 in 1000)")
 print("Classical analysis would miss this!")
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 7: Integration with Control Room")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Real-time integration for control room
 
 async def control_room_integration():
@@ -609,38 +663,43 @@ async def control_room_integration():
             await control_room.send_alert(alert)
         
         await asyncio.sleep(300)  # Run every 5 minutes
-        """)
-        
+        """
+        )
+
         print("\n✅ KEY TAKEAWAYS:")
         print("-" * 40)
-        print("""
+        print(
+            """
 1. Evaluates 2^n contingency scenarios simultaneously
 2. Finds hidden cascading failure paths
 3. Amplifies critical scenarios for easy detection
 4. Enables N-k analysis for k > 2 (impossible classically)
 5. Real-time capable for operational use
-        """)
+        """
+        )
 
 
 # ==============================================================================
 # TUTORIAL 4: Noise-Adaptive QAOA
 # ==============================================================================
 
+
 class NoiseAdaptiveQAOATutorial:
     """
     Tutorial for noise-adaptive QAOA optimization
     """
-    
+
     @staticmethod
     def tutorial():
         """
         Step-by-step guide to noise-adaptive optimization
         """
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("TUTORIAL 4: NOISE-ADAPTIVE QAOA (NAG-QAOA)")
-        print("="*70)
-        
-        print("""
+        print("=" * 70)
+
+        print(
+            """
 This innovation uses quantum hardware noise as a FEATURE
 to model renewable energy uncertainty.
 
@@ -650,11 +709,13 @@ Traditional: Noise = Bad → Try to eliminate
 Our approach: Noise = Uncertainty model → Use it!
 
 Quantum decoherence naturally models renewable variability!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 1: Mapping Uncertainties to Quantum Noise")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Power system uncertainties:
 uncertainties = {
     'solar': 0.20,      # ±20% due to clouds
@@ -676,11 +737,13 @@ mapping = {
     'wind': 'amplitude_damping',   # Amplitude variation
     'load': 'depolarizing',        # Random fluctuation
 }
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 2: Initialize Noise-Adaptive QAOA")
         print("-" * 40)
-        print("""
+        print(
+            """
 from quantumgridos.innovations import NoiseAdaptiveGridQAOA
 
 # Real quantum hardware noise profile
@@ -698,11 +761,13 @@ nag_qaoa = NoiseAdaptiveGridQAOA(network, noise_profile)
 #   1. Maps uncertainties to noise
 #   2. Pre-compensates for decoherence
 #   3. Uses noise for robust optimization
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 3: Building Uncertainty-Aware Circuit")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Build circuit that leverages noise
 circuit = nag_qaoa.build_noise_aware_circuit(layers=3)
 
@@ -724,11 +789,13 @@ for layer in range(layers):
 for bus in network.buses:
     mix_weight = 1 + renewable_fraction[bus]
     circuit.rx(beta * mix_weight, bus)
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 4: Mathematical Foundation")
         print("-" * 40)
-        print("""
+        print(
+            """
 THEOREM: Convergence Under Noise
 
 For Hamiltonian H and noise rate γ:
@@ -745,11 +812,13 @@ PROOF SKETCH:
 KEY INSIGHT:
 The noisy solution is MORE ROBUST than noiseless!
 It naturally averages over uncertainty distribution.
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 5: Practical Example - Duck Curve")
         print("-" * 40)
-        print("""
+        print(
+            """
 # California's "duck curve" problem
 # Solar drops rapidly at sunset, requiring fast ramping
 
@@ -778,11 +847,13 @@ print(f"  Solar: {robust_dispatch['solar']} MW (conservative)")
 print(f"  Gas reserves: {robust_dispatch['gas_standby']} MW (ready)")
 print(f"  Expected cost: ${robust_dispatch['cost']} (+3%)")
 print(f"  Ramp violation risk: {robust_dispatch['risk']}% (-85%!)")
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 6: Running on Real Quantum Hardware")
         print("-" * 40)
-        print("""
+        print(
+            """
 # The beauty: On real quantum hardware,
 # noise happens NATURALLY!
 
@@ -801,11 +872,13 @@ result = nag_qaoa.run_on_hardware(backend)
 
 # The hardware noise naturally models uncertainty!
 # No need to add noise - it's already there!
-        """)
-        
+        """
+        )
+
         print("\n📝 STEP 7: Validation with Monte Carlo")
         print("-" * 40)
-        print("""
+        print(
+            """
 # Validate robustness with Monte Carlo simulation
 
 def validate_robustness(solution, n_scenarios=1000):
@@ -840,34 +913,39 @@ print("Robustness comparison (1000 scenarios):")
 print(f"Traditional: {traditional_robust['violation_rate']*100:.1f}% violations")
 print(f"Quantum NAG: {quantum_robust['violation_rate']*100:.1f}% violations")
 print(f"Improvement: {(1 - quantum_robust['violation_rate']/traditional_robust['violation_rate'])*100:.0f}%")
-        """)
-        
+        """
+        )
+
         print("\n✅ KEY TAKEAWAYS:")
         print("-" * 40)
-        print("""
+        print(
+            """
 1. Quantum noise models renewable uncertainty naturally
 2. No need for scenario generation - uncertainty is built in
 3. Solutions are robust by construction
 4. Works BETTER on noisy hardware (not worse!)
 5. Proven convergence even with high noise levels
-        """)
+        """
+        )
 
 
 # ==============================================================================
 # Main Tutorial Runner
 # ==============================================================================
 
+
 def run_all_tutorials():
     """
     Run all tutorials sequentially
     """
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("   QUANTUMGRIDOS MATHEMATICAL INNOVATIONS - TUTORIALS")
     print("         Complete Implementation Guides")
     print("          Saral Systems (www.saralsystems.co)")
-    print("="*70)
-    
-    print("""
+    print("=" * 70)
+
+    print(
+        """
 Welcome to the QuantumGridOS tutorials!
 
 These four tutorials cover the mathematical innovations that make
@@ -879,25 +957,27 @@ Each tutorial includes:
   • Code examples
   • Real-world applications
   • Performance comparisons
-    """)
-    
+    """
+    )
+
     input("\nPress Enter to start Tutorial 1: Kirchhoff-Preserving Encoding...")
     KirchhoffPreservingTutorial.tutorial()
-    
+
     input("\nPress Enter to start Tutorial 2: Quantum Eigenvalue Analysis...")
     QuantumEigenvalueTutorial.tutorial()
-    
+
     input("\nPress Enter to start Tutorial 3: Multi-Contingency Analysis...")
     QuantumContingencyTutorial.tutorial()
-    
+
     input("\nPress Enter to start Tutorial 4: Noise-Adaptive QAOA...")
     NoiseAdaptiveQAOATutorial.tutorial()
-    
-    print("\n" + "="*70)
+
+    print("\n" + "=" * 70)
     print("              TUTORIALS COMPLETE!")
-    print("="*70)
-    
-    print("""
+    print("=" * 70)
+
+    print(
+        """
 You now understand the four mathematical innovations that power QuantumGridOS:
 
 1. Kirchhoff-Preserving Encoding
@@ -913,7 +993,8 @@ You now understand the four mathematical innovations that power QuantumGridOS:
    → Quantum noise models renewable uncertainty
 
 Ready to implement? Contact: quantum@saralsystems.co
-    """)
+    """
+    )
 
 
 if __name__ == "__main__":

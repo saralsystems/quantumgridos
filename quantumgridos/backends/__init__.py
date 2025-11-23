@@ -8,17 +8,17 @@ from .quantum_backends import (
     connect_to_rigetti,
     connect_to_ionq,
     connect_to_aws_braket,
-    auto_connect
+    auto_connect,
 )
 
 __all__ = [
-    'QuantumProvider',
-    'QuantumBackendConfig',
-    'QuantumBackendManager',
-    'QuantumGridBackend',
-    'connect_to_ibm_quantum',
-    'connect_to_rigetti',
-    'connect_to_ionq',
-    'connect_to_aws_braket',
-    'auto_connect'
+    "QuantumProvider",
+    "QuantumBackendConfig",
+    "QuantumBackendManager",
+    "QuantumGridBackend",
+    "connect_to_ibm_quantum",
+    "connect_to_rigetti",
+    "connect_to_ionq",
+    "connect_to_aws_braket",
+    "auto_connect",
 ]

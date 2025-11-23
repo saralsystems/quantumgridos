@@ -57,7 +57,7 @@ setup(
             "qiskit-ibmq-provider>=0.19.0",
             "pyquil>=3.0.0",
             "amazon-braket-sdk>=1.35.0",
-        ]
+        ],
     },
     entry_points={
         "console_scripts": [
