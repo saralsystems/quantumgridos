@@ -9,9 +9,9 @@ __version__ = "0.1.1"
 __author__ = "Your Name"
 
 import sys
-if sys.version_info < (3, 8) or sys.version_info >= (3, 12):
+if sys.version_info < (3, 9) or sys.version_info >= (3, 12):
     raise RuntimeError(
-        f"QuantumGridOS requires Python 3.8-3.11. You are using {sys.version}"
+        f"QuantumGridOS requires Python 3.9-3.11. You are using {sys.version}"
     )
 
 # Core imports
