@@ -9,8 +9,8 @@ from dataclasses import dataclass
 import networkx as nx
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit import Parameter
-from qiskit.algorithms import QAOA as QiskitQAOA
-from qiskit.algorithms.optimizers import COBYLA, SPSA, ADAM
+from qiskit_algorithms import QAOA as QiskitQAOA
+from qiskit_algorithms.optimizers import COBYLA, SPSA, ADAM
 from qiskit.primitives import Sampler
 from qiskit_aer import AerSimulator
 from qiskit.quantum_info import SparsePauliOp
