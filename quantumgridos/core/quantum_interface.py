@@ -170,7 +170,7 @@ class QuantumPowerInterface:
     def _init_quantum_backend(self, backend_name: str):
         """Initialize quantum computing backend"""
         if backend_name == "qiskit_aer":
-            from qiskit import Aer
+            from qiskit_aer import Aer
 
             return Aer.get_backend("aer_simulator")
         elif backend_name == "ionq":
