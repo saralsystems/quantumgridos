@@ -8,6 +8,12 @@ with power systems optimization and control.
 __version__ = "0.1.0"
 __author__ = "Your Name"
 
+import sys
+if sys.version_info < (3, 8) or sys.version_info >= (3, 12):
+    raise RuntimeError(
+        f"QuantumGridOS requires Python 3.8-3.11. You are using {sys.version}"
+    )
+
 # Core imports
 from .core.quantum_interface import QuantumPowerInterface, PowerSystemData, TCPPowerStreamHandler
 
