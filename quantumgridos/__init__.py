@@ -5,7 +5,7 @@ A high-performance Python library for integrating quantum computing
 with power systems optimization and control.
 """
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __author__ = "Your Name"
 
 import sys
