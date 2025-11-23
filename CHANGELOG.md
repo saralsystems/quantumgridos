@@ -25,6 +25,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Security updates will be listed here
 
+## [0.1.2] - 2025-11-23
+
+### Fixed
+- Fixed critical `IndentationError` in `quantumgridos/core/quantum_interface.py` caused by incorrect import statement
+- Changed `from qiskit import Aer` to `from qiskit_aer import Aer` to match modern Qiskit package structure (Qiskit 1.0+)
+- This fix resolves a blocking issue that prevented the package from being imported
+
+## [0.1.1] - 2025-11-22
+
+### Changed
+- Updated Python version compatibility to support Python 3.9-3.11
+- Improved package installation configuration
+
+### Fixed
+- Fixed package installation issues with missing submodules
+- Ensured all subpackages are correctly included during installation
+
 ## [0.1.0] - 2025-01-21
 
 ### Added
