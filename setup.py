@@ -12,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="quantumgridos",
-    version="0.1.7",
+    version="0.1.8",
     author="Saral Systems",
     author_email="contact@saralsystems.com",
     description="Real-time quantum computing interface for power systems optimization",
