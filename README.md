@@ -99,6 +99,26 @@ with qgo.TCPInterface(port=5000) as tcp:
         uc_problem.update_demand(demand_update)
         solution = solver.solve()
         tcp.send(solution.to_scada_format())
+        solution = solver.solve()
+        tcp.send(solution.to_scada_format())
+```
+
+### Quantum Power Flow
+
+```python
+import quantumgridos as qgo
+
+# Load network from CSV
+net = qgo.create_network("examples/test_case_4bus", type='csv')
+
+# Run Quantum Newton-Raphson (HHL Fast Mode)
+success, x, history, circuit = qgo.run_quantum_nr(net, method='hhl_fast')
+
+if success:
+    print("Converged! Voltage Angles:", net.buses['v_ang'].values)
+    # Optional: Visualize the circuit
+    # from quantumgridos.utils.visualizer import draw_circuit
+    # draw_circuit(circuit)
 ```
 
 ## 🏗️ Architecture
@@ -161,6 +181,7 @@ Full documentation available at [saralsystems.github.io/quantumgridos](https://s
 - [API Reference](https://saralsystems.github.io/quantumgridos/api/core.html)
 - [User Guide](https://saralsystems.github.io/quantumgridos/user_guide/index.html)
 - [Tutorials](https://saralsystems.github.io/quantumgridos/tutorials/index.html)
+- [Quantum Power Flow Guide](docs/power_flow.md)
 
 ## 🧪 Testing
 

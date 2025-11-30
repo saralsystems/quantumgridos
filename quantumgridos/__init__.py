@@ -1,105 +1,38 @@
-"""
-QuantumGridOS - Real-time Quantum-Power Systems Interface
 
-A high-performance Python library for integrating quantum computing
-with power systems optimization and control.
-"""
+from quantumgridos.core.network import Network
+from quantumgridos.core.network import Network
+from quantumgridos.io.parsers import from_csv, from_txt
+from quantumgridos.algorithms.power_flow import PowerFlowSolver
 
-__version__ = "0.1.8"
-__author__ = "Your Name"
+def create_network(source: str, type: str = 'csv', **kwargs) -> Network:
+    """
+    Factory function to create a network from various sources.
+    
+    Args:
+        source: Path to file/folder
+        type: 'csv' or 'txt'
+    """
+    if type == 'csv':
+        return from_csv(source)
+    elif type == 'txt':
+        return from_txt(source)
+    else:
+        raise ValueError(f"Unknown network type: {type}")
 
-import sys
-if sys.version_info < (3, 9) or sys.version_info >= (3, 12):
-    raise RuntimeError(
-        f"QuantumGridOS requires Python 3.9-3.11. You are using {sys.version}"
-    )
-
-# Core imports
-from .core.quantum_interface import QuantumPowerInterface, PowerSystemData, TCPPowerStreamHandler
-
-# Algorithm imports
-from .algorithms.qaoa import (
-    PowerSystemQAOA,
-    QAOAConfig,
-    solve_power_network_partitioning,
-    solve_generator_scheduling,
-)
-
-from .algorithms.vqe import PowerSystemVQE, VQEConfig, solve_opf_quantum, estimate_power_state
-
-# Power systems imports
-from .power_systems.network import (
-    PowerNetwork,
-    Bus,
-    Line,
-    Generator,
-    UnitCommitmentProblem,
-    OptimizationProblem,
-)
-
-# Convenience imports
-from .power_systems.optimizations import (
-    MaxCutOptimizer,
-    UnitCommitment,
-    OptimalPowerFlow,
-    StateEstimation,
-)
-
-# Mathematical Innovations
-from .innovations.mathematical_innovations import (
-    PowerFlowPreservingEncoding,
-    QuantumPowerSystemEigenvalue,
-    QuantumMultiContingencyAnalysis,
-    NoiseAdaptiveGridQAOA,
-    QuantumPowerInnovations,
-)
-
-__all__ = [
-    # Version
-    "__version__",
-    # Core
-    "QuantumPowerInterface",
-    "PowerSystemData",
-    "TCPPowerStreamHandler",
-    # Algorithms
-    "PowerSystemQAOA",
-    "QAOAConfig",
-    "PowerSystemVQE",
-    "VQEConfig",
-    "solve_power_network_partitioning",
-    "solve_generator_scheduling",
-    "solve_opf_quantum",
-    "estimate_power_state",
-    # Power Systems
-    "PowerNetwork",
-    "Bus",
-    "Line",
-    "Generator",
-    "UnitCommitmentProblem",
-    "OptimizationProblem",
-    # Optimizations
-    "MaxCutOptimizer",
-    "UnitCommitment",
-    "OptimalPowerFlow",
-    "StateEstimation",
-    # Mathematical Innovations
-    "PowerFlowPreservingEncoding",
-    "QuantumPowerSystemEigenvalue",
-    "QuantumMultiContingencyAnalysis",
-    "NoiseAdaptiveGridQAOA",
-    "QuantumPowerInnovations",
-]
-
-
-# Package metadata
-def get_version():
-    """Return the current version"""
-    return __version__
-
-
-def info():
-    """Print package information"""
-    print(f"QuantumGridOS v{__version__}")
-    print("Real-time Quantum-Power Systems Interface")
-    print("Documentation: https://quantumgridos.readthedocs.io")
-    print("GitHub: https://github.com/yourusername/quantumgridos")
+def run_quantum_nr(network: Network, **kwargs):
+    """
+    Run Quantum Newton-Raphson Power Flow on the given network.
+    
+    Args:
+        network: The Network object
+        kwargs: Arguments for PowerFlowSolver.solve (method, max_iter, etc.)
+    """
+    solver = PowerFlowSolver(network)
+    success, x, history, circuit = solver.solve(**kwargs)
+    
+    if success:
+        print("Power flow converged successfully.")
+    else:
+        print("Power flow failed to converge.")
+        
+    return success, x, history, circuit

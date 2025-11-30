@@ -25,6 +25,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Security updates will be listed here
 
+## [0.1.9] - 2025-11-29
+
+### Added
+- New quantum power flow algorithms (HHL, VQLS)
+- Enhanced visualization tools for quantum circuits and power networks
+- Support for detailed 4-bus test case
+
+### Changed
+- Updated core network modeling to support quantum state encoding
+- Improved QAOA implementation for power system optimization
+- Refactored project structure for better modularity
+
+### Fixed
+- Resolved import issues with `qiskit-aer`
+- Fixed visualization dependencies
+
 ## [0.1.2] - 2025-11-23
 
 ### Fixed

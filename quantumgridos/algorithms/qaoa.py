@@ -12,7 +12,10 @@ from qiskit.circuit import Parameter
 from qiskit_algorithms import QAOA as QiskitQAOA, SamplingVQE
 from qiskit_algorithms.optimizers import COBYLA, SPSA, ADAM
 from qiskit.primitives import StatevectorSampler as Sampler
-from qiskit_aer import AerSimulator
+try:
+    from qiskit_aer import AerSimulator
+except ImportError:
+    AerSimulator = None
 from qiskit.quantum_info import SparsePauliOp
 import logging
 

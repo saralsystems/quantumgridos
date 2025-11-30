@@ -12,9 +12,13 @@ from qiskit.circuit import ParameterVector
 from qiskit_algorithms import VQE as QiskitVQE
 from qiskit_algorithms.optimizers import SLSQP, L_BFGS_B, COBYLA
 from qiskit.circuit.library import TwoLocal, RealAmplitudes, EfficientSU2
-from qiskit_aer.primitives import Estimator
+try:
+    from qiskit_aer.primitives import Estimator
+    from qiskit_aer import AerSimulator
+except ImportError:
+    Estimator = None
+    AerSimulator = None
 from qiskit.quantum_info import SparsePauliOp
-from qiskit_aer import AerSimulator
 import logging
 
 logger = logging.getLogger(__name__)
