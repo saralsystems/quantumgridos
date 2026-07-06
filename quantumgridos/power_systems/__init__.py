@@ -20,6 +20,7 @@ from .low_inertia import (
     LowInertiaStudy,
     LowInertiaValidation,
     create_low_inertia_study,
+    get_low_inertia_public_data_catalog,
     label_low_inertia_dynamics,
     solve_low_inertia_counterfactual,
 )
@@ -48,6 +49,7 @@ __all__ = [
     "create_opf_optimizer",
     "create_state_estimator",
     "create_low_inertia_study",
+    "get_low_inertia_public_data_catalog",
     "label_low_inertia_dynamics",
     "solve_low_inertia_counterfactual",
 ]

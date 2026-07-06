@@ -65,6 +65,7 @@ Documentation Contents
 
    installation
    quickstart
+   low_inertia_handoff
    user_guide/index
    tutorials/index
    examples/index

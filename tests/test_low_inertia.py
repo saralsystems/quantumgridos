@@ -155,3 +155,16 @@ def test_counterfactual_solver_can_use_dynamic_labels():
         candidate.metrics["dynamic_model"] == "two_area_reduced_electromechanical_surrogate"
         for candidate in result.candidates
     )
+
+
+def test_low_inertia_public_data_catalog_exposes_stable_links_without_signed_url():
+    catalog = qgo.get_low_inertia_public_data_catalog()
+
+    assert catalog["quantumgridos"]["repository"] == "https://github.com/saralsystems/quantumgridos"
+    assert catalog["s3_public_handoff_bundle"]["bucket"] == "qgo-low-inertia-public-data-20260706-654777652612"
+    assert catalog["execution_requirements"]["cuda_required"] is True
+    assert "rts_gmlc_repository" in catalog["public_sources"]
+
+    rendered = repr(catalog)
+    assert "X-Amz-" not in rendered
+    assert "AKIA" not in rendered

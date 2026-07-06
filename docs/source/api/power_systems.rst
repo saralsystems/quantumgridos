@@ -82,6 +82,19 @@ StateEstimation
    :show-inheritance:
    :special-members: __init__
 
+Low-Inertia Counterfactual Search
+---------------------------------
+
+.. automodule:: quantumgridos.power_systems.low_inertia
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Public Data Catalog
+~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: quantumgridos.power_systems.low_inertia.get_low_inertia_public_data_catalog
+
 Examples
 --------
 

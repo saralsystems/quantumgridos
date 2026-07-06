@@ -10,6 +10,7 @@ from quantumgridos.power_systems.low_inertia import (
     LowInertiaOption,
     LowInertiaStudy,
     create_low_inertia_study,
+    get_low_inertia_public_data_catalog,
     label_low_inertia_dynamics,
     solve_low_inertia_counterfactual,
 )

@@ -148,6 +148,29 @@ The dynamic labeler adds inter-area angle, area-frequency split, and small-signa
 damping checks. It is a reproducible reduced electromechanical screen, not a
 replacement for RMS/EMT validation.
 
+Public handoff links and CUDA execution requirements are available directly
+from the package:
+
+```python
+import quantumgridos as qgo
+
+catalog = qgo.get_low_inertia_public_data_catalog()
+print(catalog["s3_public_handoff_bundle"]["s3_uri"])
+print(catalog["public_sources"]["neso_august_2019_frequency"])
+```
+
+The July 2026 handoff bundle is stored at:
+
+- S3 URI: `s3://qgo-low-inertia-public-data-20260706-654777652612/public/low_inertia_quantum_public_handoff_20260706.zip`
+- SHA256: `534e4c6b01845f3ac9e48d4fb3f4b0104db025b2f4f6db833eef26ed65bc3fc2`
+- Approximate size: 91 MB
+
+The object currently requires a presigned HTTPS URL. Do not commit expiring S3
+signed URLs to source control; share them out-of-band or generate a fresh one
+from the owning AWS account. CUDA/cuOpt comparisons should use the same
+package-variable schema as the CPU and Qiskit solvers and report end-to-end
+wall-clock time.
+
 ### Quantum Power Flow
 
 ```python
