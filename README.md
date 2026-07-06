@@ -103,6 +103,51 @@ with qgo.TCPInterface(port=5000) as tcp:
         tcp.send(solution.to_scada_format())
 ```
 
+### Low-Inertia Counterfactual Search
+
+```python
+import quantumgridos as qgo
+
+# Built-in Braket-scale demo case inspired by the GB 9 Aug 2019 disturbance.
+study = qgo.create_low_inertia_study()
+
+# QuantumGridOS builds a QUBO candidate-search layer, then validates every
+# candidate with reduced frequency-security physics.
+result = qgo.solve_low_inertia_counterfactual(
+    study,
+    solvers=("exact", "annealing", "qaoa"),
+    top_k=24,
+    qaoa_layers=1,
+)
+
+print(result.best.portfolio.selected_labels)
+print(result.best.metrics["nadir_hz"])
+print(result.best.metrics["max_abs_rocof_hz_s"])
+```
+
+Use this API for low-inertia studies where quantum or quantum-inspired solvers
+search over approved binary grid/DER settings such as synchronous commitment,
+BESS fast-frequency response, grid-forming mode, DER ride-through package, and
+pre-event export reduction. Classical physics validation remains authoritative.
+
+For publication screening, enable the native two-area dynamic-label surrogate:
+
+```python
+result = qgo.solve_low_inertia_counterfactual(
+    study,
+    solvers=("exact", "annealing"),
+    dynamic_labels=True,
+)
+
+label = qgo.label_low_inertia_dynamics(study, bits=result.best.portfolio.bitstring)
+print(label.metrics["max_relative_angle_rad"])
+print(label.metrics["min_electromechanical_damping_ratio"])
+```
+
+The dynamic labeler adds inter-area angle, area-frequency split, and small-signal
+damping checks. It is a reproducible reduced electromechanical screen, not a
+replacement for RMS/EMT validation.
+
 ### Quantum Power Flow
 
 ```python
