@@ -14,6 +14,7 @@ from unittest.mock import patch
 
 
 PLUGIN_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = PLUGIN_ROOT.parent.parent
 SERVER_PATH = PLUGIN_ROOT / "mcp" / "records_server.py"
 SPEC = importlib.util.spec_from_file_location("quantumgridos_records_server", SERVER_PATH)
 assert SPEC is not None and SPEC.loader is not None
@@ -163,6 +164,55 @@ class RecordsServerTests(unittest.TestCase):
         output = [json.loads(line) for line in completed.stdout.splitlines()]
         self.assertEqual([message["id"] for message in output], [1, 2])
         self.assertEqual(completed.stderr, "")
+
+
+class PackageManifestTests(unittest.TestCase):
+    def test_plugin_manifest_points_to_packaged_components(self) -> None:
+        manifest = json.loads(
+            (PLUGIN_ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(manifest["name"], PLUGIN_ROOT.name)
+        self.assertEqual(manifest["skills"], "./skills/")
+        self.assertEqual(manifest["mcpServers"], "./.mcp.json")
+        self.assertTrue((PLUGIN_ROOT / "skills").is_dir())
+        self.assertTrue((PLUGIN_ROOT / ".mcp.json").is_file())
+
+    def test_mcp_manifest_starts_the_packaged_server(self) -> None:
+        manifest = json.loads((PLUGIN_ROOT / ".mcp.json").read_text(encoding="utf-8"))
+        server = manifest["mcpServers"]["quantumgridos_records"]
+        self.assertEqual(server["command"], "python3")
+        self.assertEqual(server["cwd"], ".")
+        self.assertEqual(server["args"], ["./mcp/records_server.py"])
+        self.assertTrue(SERVER_PATH.is_file())
+
+    def test_repository_marketplace_points_to_plugin(self) -> None:
+        marketplace = json.loads(
+            (REPO_ROOT / ".agents" / "plugins" / "marketplace.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        entries = {entry["name"]: entry for entry in marketplace["plugins"]}
+        entry = entries[PLUGIN_ROOT.name]
+        self.assertEqual(entry["source"]["source"], "local")
+        self.assertEqual(entry["source"]["path"], "./plugins/" + PLUGIN_ROOT.name)
+
+    def test_skill_is_complete_and_declares_mcp_dependency(self) -> None:
+        skill_root = PLUGIN_ROOT / "skills" / "quantum-service-evidence-reviewer"
+        instructions = (skill_root / "SKILL.md").read_text(encoding="utf-8")
+        agent_manifest = (skill_root / "agents" / "openai.yaml").read_text(
+            encoding="utf-8"
+        )
+        self.assertTrue(instructions.startswith("---\nname: quantum-service-evidence-reviewer\n"))
+        self.assertNotIn("[TODO:", instructions)
+        self.assertIn('value: "quantumgridos_records"', agent_manifest)
+
+    def test_all_training_fixtures_are_explicitly_synthetic(self) -> None:
+        fixture_paths = sorted((PLUGIN_ROOT / "records").glob("*/*.json"))
+        self.assertEqual(len(fixture_paths), 5)
+        for fixture_path in fixture_paths:
+            record = json.loads(fixture_path.read_text(encoding="utf-8"))
+            self.assertEqual(record["evidence_status"], "synthetic_training_fixture")
+            self.assertEqual(fixture_path.stem, record["record_id"])
 
 
 if __name__ == "__main__":

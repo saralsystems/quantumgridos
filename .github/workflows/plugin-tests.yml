@@ -1,0 +1,48 @@
+name: Plugin Tests
+
+on:
+  pull_request:
+    paths:
+      - ".agents/plugins/**"
+      - "plugins/**"
+      - ".github/workflows/plugin-tests.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".agents/plugins/**"
+      - "plugins/**"
+      - ".github/workflows/plugin-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-review-plugin:
+    name: ${{ matrix.label }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Python 3.9 on Ubuntu
+            os: ubuntu-latest
+            python: "3.9"
+          - label: Python 3.10 on macOS
+            os: macos-latest
+            python: "3.10"
+          - label: Python 3.11 on Windows
+            os: windows-latest
+            python: "3.11"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run dependency-free plugin tests
+        run: >-
+          python -m unittest discover
+          -s plugins/quantumgridos-evidence-review/tests
+          -p "test_*.py"
