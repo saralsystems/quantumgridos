@@ -1,0 +1,16 @@
+{
+  "record_id": "demo-result-001",
+  "schema_version": "1.0",
+  "service_job_id": "demo-job-001",
+  "plan_record_id": "demo-plan-001",
+  "raw_result_reference": null,
+  "provider_metadata": null,
+  "evidence_class": "no_execution_evidence",
+  "uncertainty": null,
+  "derived_transformations": [],
+  "application_validation": "not_performed",
+  "provenance_hashes": {},
+  "created_at": "2026-08-23T00:00:03Z",
+  "evidence_status": "synthetic_training_fixture",
+  "supported_conclusion": "No quantum execution or scientific result is represented by this fixture."
+}

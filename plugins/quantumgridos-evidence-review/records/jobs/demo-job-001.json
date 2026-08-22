@@ -1,0 +1,22 @@
+{
+  "record_id": "demo-job-001",
+  "schema_version": "1.0",
+  "service_job_id": "demo-job-001",
+  "service_request_id": "demo-request-001",
+  "plan_record_id": "demo-plan-001",
+  "service_state": "planned_not_submitted",
+  "provider_job_id": null,
+  "provider_state": "not_applicable",
+  "submission_attempts": 0,
+  "reconciliation_state": "not_required",
+  "transitions": [
+    {
+      "from": null,
+      "to": "planned_not_submitted",
+      "at": "2026-08-23T00:00:02Z"
+    }
+  ],
+  "terminal_reason": null,
+  "observed_at": "2026-08-23T00:00:02Z",
+  "evidence_status": "synthetic_training_fixture"
+}

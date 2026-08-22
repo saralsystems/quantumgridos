@@ -1,0 +1,22 @@
+{
+  "record_id": "demo-plan-001",
+  "schema_version": "1.0",
+  "service_request_id": "demo-request-001",
+  "plan_hash": null,
+  "capability_snapshot": null,
+  "compilation_hash": null,
+  "execution_mode": "not_executed",
+  "provider_scope": "none",
+  "quota_policy": "no external spending",
+  "retry_policy": "no submission attempts",
+  "result_destination": null,
+  "approval_reference": "training-fixture-only",
+  "created_at": "2026-08-23T00:00:01Z",
+  "evidence_status": "synthetic_training_fixture",
+  "missing_fields": [
+    "plan_hash",
+    "capability_snapshot",
+    "compilation_hash",
+    "result_destination"
+  ]
+}

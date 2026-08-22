@@ -1,0 +1,15 @@
+{
+  "record_id": "demo-operations-001",
+  "schema_version": "1.0",
+  "service_job_id": "demo-job-001",
+  "trace_references": [],
+  "metrics_summary": {},
+  "log_references": [],
+  "cache_decisions": [],
+  "retry_count": 0,
+  "incident_references": [],
+  "redaction_state": "no_credentials_or_secrets_present",
+  "service_version": "training-fixture",
+  "observed_at": "2026-08-23T00:00:04Z",
+  "evidence_status": "synthetic_training_fixture"
+}
