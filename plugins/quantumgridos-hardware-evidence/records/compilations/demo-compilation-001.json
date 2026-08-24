@@ -1,0 +1,28 @@
+{
+  "record_id": "demo-compilation-001",
+  "schema_version": "1.0",
+  "evidence_status": "synthetic_training_fixture",
+  "intent_record_id": "demo-intent-001",
+  "capability_record_id": "demo-capability-001",
+  "source_circuit_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "target_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "isa_circuit_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "sdk": "qiskit",
+  "sdk_version": "2.5.2",
+  "optimization_level": 2,
+  "compiler_seed": 20,
+  "initial_layout": [0, 2],
+  "final_layout": [0, 1],
+  "measurement_map_classical_to_physical": {"0": 0, "1": 1},
+  "isa_operations": [
+    {"name": "rz", "qubits": [0]},
+    {"name": "sx", "qubits": [0]},
+    {"name": "cz", "qubits": [1, 2]},
+    {"name": "sx", "qubits": [1]},
+    {"name": "cz", "qubits": [0, 1]},
+    {"name": "measure", "qubits": [0]},
+    {"name": "measure", "qubits": [1]}
+  ],
+  "metrics": {"depth": 13, "rz": 8, "sx": 8, "cz": 4, "measure": 2}
+}
+

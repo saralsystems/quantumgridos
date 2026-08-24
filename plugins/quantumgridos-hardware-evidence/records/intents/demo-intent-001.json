@@ -1,0 +1,13 @@
+{
+  "record_id": "demo-intent-001",
+  "schema_version": "1.0",
+  "evidence_status": "synthetic_training_fixture",
+  "experiment_id": "bell-parity-teaching-fixture",
+  "circuit_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "logical_qubits": 2,
+  "operations": ["h:0", "cx:0,1", "measure:0->0", "measure:1->1"],
+  "measurement_contract": "computational_basis_bits_c1_c0",
+  "shots": 2048,
+  "expected_invariant": "only_00_and_11_with_equal_ideal_probability"
+}
+
