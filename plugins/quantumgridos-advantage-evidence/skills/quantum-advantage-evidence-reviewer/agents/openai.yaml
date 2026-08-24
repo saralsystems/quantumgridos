@@ -1,0 +1,7 @@
+interface:
+  display_name: "Quantum Advantage Evidence Reviewer"
+  short_description: "Review quantum claims without inventing evidence"
+  default_prompt: "Use $quantum-advantage-evidence-reviewer to audit this claim and return the narrowest supported decision."
+
+policy:
+  allow_implicit_invocation: true
