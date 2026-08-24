@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "quantumgridos_qec_evidence": {
+      "command": "python3",
+      "args": [
+        "./mcp/qec_evidence_server.py"
+      ],
+      "cwd": ".",
+      "env_vars": [
+        "QUANTUMGRIDOS_QEC_EVIDENCE_DIR"
+      ],
+      "startup_timeout_sec": 10,
+      "tool_timeout_sec": 30
+    }
+  }
+}

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Quantum Error-Correction Evidence Reviewer"
+  short_description: "Review QEC evidence without hardware control"
+  brand_color: "#155E75"
+  default_prompt: "Use $quantum-error-correction-evidence-reviewer to audit these QEC records and bound the strongest supported claim."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "quantumgridos_qec_evidence"
+      description: "Read-only access to local QuantumGridOS QEC evidence records"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

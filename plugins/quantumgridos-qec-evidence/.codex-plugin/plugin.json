@@ -1,0 +1,39 @@
+{
+  "name": "quantumgridos-qec-evidence",
+  "version": "0.1.0",
+  "description": "Read-only review of quantum error-correction code, syndrome, decoder, and claim evidence",
+  "author": {
+    "name": "Saral Systems",
+    "email": "contact@saralsystems.com",
+    "url": "https://github.com/saralsystems"
+  },
+  "homepage": "https://github.com/saralsystems/quantumgridos/tree/main/plugins/quantumgridos-qec-evidence",
+  "repository": "https://github.com/saralsystems/quantumgridos",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantum computing",
+    "error correction",
+    "evidence",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QuantumGridOS QEC Evidence",
+    "shortDescription": "Audit QEC records without hardware control",
+    "longDescription": "Inspect local code specifications, syndrome batches, distance runs, evidence claims, and bundle manifests through a read-only MCP server, then review circuit semantics, repetition boundaries, and the highest supported claim with a focused Skill.",
+    "developerName": "Saral Systems",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read-only",
+      "Quantum error-correction evidence review"
+    ],
+    "websiteURL": "https://github.com/saralsystems/quantumgridos",
+    "brandColor": "#155E75",
+    "defaultPrompt": [
+      "Inspect this quantum error-correction code specification and identify algebraic gaps.",
+      "Review these distance runs and state the strongest supported scaling claim.",
+      "Audit this QEC evidence bundle without submitting or changing hardware jobs."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}
