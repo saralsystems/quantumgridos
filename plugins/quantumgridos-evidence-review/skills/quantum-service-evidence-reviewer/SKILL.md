@@ -1,6 +1,6 @@
 ---
 name: quantum-service-evidence-reviewer
-description: Review a quantum-classical service by retrieving and separating its request, immutable plan, job, result, and operations records. Use when auditing asynchronous quantum APIs, idempotency, provider adapters, caches, observability, reproducibility, or QuantumGridOS service boundaries. Keep the workflow read-only; never submit, cancel, rerun, reserve, authenticate, or change provider state.
+description: Review a quantum-classical service by retrieving and separating its request, immutable plan, job, result, and operations records and mapping its nested execution loops. Use when auditing asynchronous quantum APIs, shots, algorithm iterations, polling, retries, idempotency, provider adapters, caches, observability, reproducibility, or QuantumGridOS service boundaries. Keep the workflow read-only; never submit, cancel, rerun, reserve, authenticate, or change provider state.
 ---
 
 # Quantum Service Evidence Reviewer
@@ -39,7 +39,22 @@ Create five distinct sections:
 
 Record each MCP response SHA-256 digest as retrieval provenance. The digest proves which stored file was read; it does not prove that the statements inside the file are true.
 
-## 4. Test invariants
+## 4. Map nested execution and repetition
+
+Build a loop ledger for every supplied repetition boundary. For each boundary, record the repeated object, owner, input, output, stopping rule, authoritative record, and whether it creates new quantum evidence. Check explicitly for:
+
+- Python construction loops over circuit fragments, observables, or parameter sets;
+- compiler candidate search over layouts, routes, or rewrites;
+- shot repetition of one freshly prepared compiled circuit;
+- provider jobs and any batch or session grouping;
+- classical optimizer or domain-algorithm updates;
+- provider polling;
+- service retry or uncertain-submission reconciliation;
+- complete experiment replication under a declared protocol.
+
+Keep gates, circuits, shots, provider jobs, and classical iterations distinct. Polling changes service knowledge but does not create a new shot, provider job, or parameter update. A retry is an operational decision and must not silently become a second experiment.
+
+## 5. Test invariants
 
 Report each check as passed, failed, or not testable:
 
@@ -56,22 +71,23 @@ Report each check as passed, failed, or not testable:
 
 Treat an identifier, hash, schema, or lifecycle mismatch as an error, not as ordinary quantum noise.
 
-## 5. Bound quantum claims
+## 6. Bound quantum claims
 
 Distinguish exact computation, finite-shot ideal simulation, noisy simulation, provider simulation, and physical-QPU execution. A successful API response, worker completion, provider job, cache hit, or feasible decoded candidate does not by itself establish scientific validity, optimality, application value, or quantum advantage.
 
-## 6. Return the review
+## 7. Return the review
 
 Return:
 
 1. scope and authority;
 2. the five-record ledger with provenance digests;
-3. passed, failed, and untestable invariants;
-4. duplicate-work, data-loss, secret, and observability risks;
-5. unsupported quantum or application claims;
-6. the narrowest conclusion supported by the records;
-7. missing evidence required for a stronger conclusion;
-8. safe read-only next checks;
-9. state-changing actions that require separate authorization.
+3. the nested execution and loop ledger;
+4. passed, failed, and untestable invariants;
+5. duplicate-work, data-loss, secret, and observability risks;
+6. unsupported quantum or application claims;
+7. the narrowest conclusion supported by the records;
+8. missing evidence required for a stronger conclusion;
+9. safe read-only next checks;
+10. state-changing actions that require separate authorization.
 
 Never invent records, measurements, provider status, calibration data, citations, credentials, or hardware execution.

@@ -92,6 +92,12 @@ These fields are a review contract, not a claim that the current QuantumGridOS P
 
 Use `null`, `unknown`, or `not_supplied` for an absent fact. Never fill a missing field with a plausible provider value.
 
+## Nested execution cross-check
+
+The five records should make every supplied repetition boundary traceable. The plan should identify the source and compiled circuit artifacts, parameter bindings, target snapshot, shot or precision contract, execution grouping, stopping or budget policy, and checkpoint policy that define the work. The job should distinguish service transitions, provider jobs, batches or sessions, polling observations, submission attempts, and reconciliation events. The result should distinguish raw shot-level or aggregate evidence from classical parameter updates and application validation. The operations record should carry polling, retry, timeout, and reconciliation evidence without presenting those events as quantum execution.
+
+If the records use the words `loop`, `iteration`, `execution`, `retry`, or `run` without naming the repeated object and owner, mark the boundary as ambiguous. Do not infer that a poll created a new job, that a retry was safe, that a shot updated parameters, or that a provider job was a complete experiment.
+
 ## MCP response envelope
 
 Each successful tool call returns:

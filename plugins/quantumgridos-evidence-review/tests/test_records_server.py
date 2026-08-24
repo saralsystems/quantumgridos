@@ -206,6 +206,23 @@ class PackageManifestTests(unittest.TestCase):
         self.assertNotIn("[TODO:", instructions)
         self.assertIn('value: "quantumgridos_records"', agent_manifest)
 
+    def test_skill_separates_scientific_and_operational_repetition(self) -> None:
+        skill_root = PLUGIN_ROOT / "skills" / "quantum-service-evidence-reviewer"
+        instructions = (skill_root / "SKILL.md").read_text(encoding="utf-8")
+        contract = (skill_root / "references" / "record-contract.md").read_text(
+            encoding="utf-8"
+        )
+        for term in (
+            "shot repetition",
+            "classical optimizer",
+            "provider polling",
+            "reconciliation",
+            "experiment replication",
+        ):
+            self.assertIn(term, instructions)
+        self.assertIn("Polling changes service knowledge", instructions)
+        self.assertIn("Nested execution cross-check", contract)
+
     def test_all_training_fixtures_are_explicitly_synthetic(self) -> None:
         fixture_paths = sorted((PLUGIN_ROOT / "records").glob("*/*.json"))
         self.assertEqual(len(fixture_paths), 5)

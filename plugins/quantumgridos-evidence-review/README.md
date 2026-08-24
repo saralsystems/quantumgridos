@@ -1,6 +1,6 @@
 # QuantumGridOS Evidence Review plugin
 
-This local Codex plugin implements the five-record mental model from the quantum-classical service chapter of *Pre-Quantum*. It packages one focused Skill with one read-only MCP server.
+This local Codex plugin implements the five-record and nested-execution mental models from the quantum-classical service chapter of *Pre-Quantum*. It packages one focused Skill with one read-only MCP server. The Skill separates gates, circuits, shots, provider jobs, algorithm iterations, polling, retry, reconciliation, and complete experiment replication before it evaluates record invariants.
 
 The server exposes exactly five tools:
 

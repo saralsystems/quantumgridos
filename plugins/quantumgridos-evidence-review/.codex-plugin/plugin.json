@@ -1,7 +1,7 @@
 {
   "name": "quantumgridos-evidence-review",
-  "version": "0.1.0",
-  "description": "Read-only review of quantum-classical service evidence records",
+  "version": "0.1.0+codex.20260824090622",
+  "description": "Read-only review of quantum-classical records and execution loops",
   "author": {
     "name": "Saral Systems",
     "email": "contact@saralsystems.com",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "QuantumGridOS Evidence Review",
     "shortDescription": "Audit five linked quantum-service records",
-    "longDescription": "Inspect request, plan, job, result, and operations records through a read-only local MCP server, then review their provenance and cross-record invariants with a focused Skill.",
+    "longDescription": "Inspect request, plan, job, result, and operations records through a read-only local MCP server, then review their provenance, nested execution loops, and cross-record invariants with a focused Skill.",
     "developerName": "Saral Systems",
     "category": "Developer Tools",
     "capabilities": [
