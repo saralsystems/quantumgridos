@@ -1,0 +1,15 @@
+{
+  "record_id": "demo-request-001",
+  "schema_version": "1.0",
+  "service_request_id": "demo-request-001",
+  "authorization_reference": "training-fixture-only",
+  "idempotency_key": "book-demo-001",
+  "intent_hash": null,
+  "requested_evidence_contract": "finite-shot ideal simulation",
+  "backend_selection_policy": "local simulator only",
+  "created_at": "2026-08-23T00:00:00Z",
+  "evidence_status": "synthetic_training_fixture",
+  "missing_fields": [
+    "intent_hash"
+  ]
+}

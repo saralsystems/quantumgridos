@@ -1,0 +1,40 @@
+{
+  "name": "quantumgridos-hardware-evidence",
+  "version": "0.1.0",
+  "description": "Read-only inspection of quantum hardware evidence and transpilation records",
+  "author": {
+    "name": "Saral Systems",
+    "email": "contact@saralsystems.com",
+    "url": "https://github.com/saralsystems"
+  },
+  "homepage": "https://github.com/saralsystems/quantumgridos/tree/main/plugins/quantumgridos-hardware-evidence",
+  "repository": "https://github.com/saralsystems/quantumgridos",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantum computing",
+    "transpilation",
+    "hardware evidence",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QuantumGridOS Hardware Evidence",
+    "shortDescription": "Audit transpilation and hardware evidence records",
+    "longDescription": "Inspect five local experiment records, validate logical-to-physical compilation invariants, and bound simulator or hardware claims without provider authentication or job submission.",
+    "developerName": "Saral Systems",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read-only",
+      "Transpilation audit",
+      "Hardware evidence review"
+    ],
+    "websiteURL": "https://github.com/saralsystems/quantumgridos",
+    "brandColor": "#17324D",
+    "defaultPrompt": [
+      "Audit these five quantum experiment records without changing provider state.",
+      "Explain this logical-to-physical transpilation through intent, layout, ISA, and evidence.",
+      "Identify which facts are still missing before this result can be called hardware evidence."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

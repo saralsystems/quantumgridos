@@ -1,0 +1,14 @@
+interface:
+  display_name: "Quantum Hardware Evidence Inspector"
+  short_description: "Audit transpilation and hardware evidence"
+  brand_color: "#17324D"
+  default_prompt: "Use $quantum-hardware-evidence-inspector to audit these five experiment records and explain the transpilation mappings."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "quantumgridos_hardware_evidence"
+      description: "Read-only access to local quantum experiment evidence records"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true
+

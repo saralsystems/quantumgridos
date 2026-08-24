@@ -1,0 +1,14 @@
+{
+  "record_id": "demo-execution-001",
+  "schema_version": "1.0",
+  "evidence_status": "synthetic_training_fixture",
+  "compilation_record_id": "demo-compilation-001",
+  "isa_circuit_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "execution_class": "local_ideal_simulator_fixture",
+  "provider": "none",
+  "provider_job_id": null,
+  "submission_status": "not_submitted",
+  "shots": 2048,
+  "seed_simulator": 23
+}
+

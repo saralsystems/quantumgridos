@@ -219,6 +219,10 @@ QuantumGridOS uses optimized binary protocol for minimal latency:
 
 ## 📚 Documentation
 
+### Codex Skill, MCP, and plugin
+
+The repository includes a first read-only learning companion at [`plugins/quantumgridos-evidence-review`](plugins/quantumgridos-evidence-review). It packages a focused Skill and five local MCP tools for reviewing request, plan, job, result, and operations records without authenticating to a provider or changing quantum jobs.
+
 Full documentation available at [saralsystems.github.io/quantumgridos](https://saralsystems.github.io/quantumgridos/)
 
 - [Getting Started Guide](https://saralsystems.github.io/quantumgridos/installation.html)

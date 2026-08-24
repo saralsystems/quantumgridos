@@ -100,6 +100,12 @@ CLA.md
 *.npy
 *.npz
 
+# Codex plugin manifests and intentionally versioned training records
+!.agents/plugins/marketplace.json
+!plugins/**/.codex-plugin/plugin.json
+!plugins/**/.mcp.json
+!plugins/quantumgridos-evidence-review/records/**/*.json
+
 # Logs
 *.log
 logs/

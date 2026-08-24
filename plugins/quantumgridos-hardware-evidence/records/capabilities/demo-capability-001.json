@@ -1,0 +1,15 @@
+{
+  "record_id": "demo-capability-001",
+  "schema_version": "1.0",
+  "evidence_status": "synthetic_training_fixture",
+  "snapshot_id": "local-line-target-fixture",
+  "captured_at": "2026-08-24T00:00:00Z",
+  "provider": "none-local-fixture",
+  "backend_name": "generic-backend-v2-fixture",
+  "physical_qubits": [0, 1, 2],
+  "target_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "supported_operations": ["rz", "sx", "x", "cz", "measure", "reset", "delay"],
+  "coupling_edges": [[0, 1], [1, 0], [1, 2], [2, 1]],
+  "operational": "not_applicable_local_fixture"
+}
+

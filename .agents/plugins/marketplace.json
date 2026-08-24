@@ -1,0 +1,56 @@
+{
+  "name": "quantumgridos",
+  "interface": {
+    "displayName": "QuantumGridOS"
+  },
+  "plugins": [
+    {
+      "name": "quantumgridos-evidence-review",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quantumgridos-evidence-review"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "quantumgridos-hardware-evidence",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quantumgridos-hardware-evidence"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "quantumgridos-qec-evidence",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quantumgridos-qec-evidence"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "quantumgridos-advantage-evidence",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quantumgridos-advantage-evidence"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

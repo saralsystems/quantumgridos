@@ -1,0 +1,13 @@
+interface:
+  display_name: "Quantum Service Evidence Reviewer"
+  short_description: "Review quantum-service evidence safely"
+  brand_color: "#155E75"
+  default_prompt: "Use $quantum-service-evidence-reviewer to audit these five quantum-service records."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "quantumgridos_records"
+      description: "Read-only access to local QuantumGridOS service evidence records"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

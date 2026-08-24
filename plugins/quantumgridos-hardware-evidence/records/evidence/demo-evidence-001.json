@@ -1,0 +1,13 @@
+{
+  "record_id": "demo-evidence-001",
+  "schema_version": "1.0",
+  "evidence_status": "synthetic_training_fixture",
+  "execution_record_id": "demo-execution-001",
+  "evidence_class": "finite_shot_ideal_simulation_fixture",
+  "counts": {"00": 1033, "11": 1015},
+  "shots": 2048,
+  "raw_result_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "uncertainty_method": "finite_shot_binomial_analysis_required",
+  "transformations": [],
+  "bounded_conclusion": "The synthetic fixture contains only correlated Bell outcomes; it is not provider or physical-QPU evidence."
+}

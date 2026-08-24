@@ -1,0 +1,40 @@
+{
+  "name": "quantumgridos-advantage-evidence",
+  "version": "0.1.0",
+  "description": "Read-only review of quantum-versus-classical claims, experiment provenance, and engineering decisions",
+  "author": {
+    "name": "Saral Systems",
+    "email": "contact@saralsystems.com",
+    "url": "https://github.com/saralsystems"
+  },
+  "homepage": "https://github.com/saralsystems/quantumgridos/tree/main/plugins/quantumgridos-advantage-evidence",
+  "repository": "https://github.com/saralsystems/quantumgridos",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantum computing",
+    "advantage",
+    "evidence",
+    "benchmark",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QuantumGridOS Advantage Evidence",
+    "shortDescription": "Audit quantum claims with versioned evidence",
+    "longDescription": "Inspect local problem contracts, classical baselines, experiment manifests, decision gates, and evidence ledgers through a read-only MCP server, then review circuit boundaries, comparison fairness, and the narrowest supported action with a focused Skill.",
+    "developerName": "Saral Systems",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read-only",
+      "Quantum advantage evidence review"
+    ],
+    "websiteURL": "https://github.com/saralsystems/quantumgridos",
+    "brandColor": "#17324D",
+    "defaultPrompt": [
+      "Audit this quantum claim and identify the narrowest supported conclusion.",
+      "Compare these classical and quantum records under one task contract.",
+      "Trace this circuit from logical intent to a bounded engineering decision."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

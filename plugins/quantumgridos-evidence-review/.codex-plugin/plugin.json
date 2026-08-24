@@ -1,0 +1,39 @@
+{
+  "name": "quantumgridos-evidence-review",
+  "version": "0.1.0+codex.20260824090622",
+  "description": "Read-only review of quantum-classical records and execution loops",
+  "author": {
+    "name": "Saral Systems",
+    "email": "contact@saralsystems.com",
+    "url": "https://github.com/saralsystems"
+  },
+  "homepage": "https://github.com/saralsystems/quantumgridos/tree/main/plugins/quantumgridos-evidence-review",
+  "repository": "https://github.com/saralsystems/quantumgridos",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantum computing",
+    "evidence",
+    "mcp",
+    "service architecture"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "QuantumGridOS Evidence Review",
+    "shortDescription": "Audit five linked quantum-service records",
+    "longDescription": "Inspect request, plan, job, result, and operations records through a read-only local MCP server, then review their provenance, nested execution loops, and cross-record invariants with a focused Skill.",
+    "developerName": "Saral Systems",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read-only",
+      "Structured evidence review"
+    ],
+    "websiteURL": "https://github.com/saralsystems/quantumgridos",
+    "brandColor": "#155E75",
+    "defaultPrompt": [
+      "Review these five quantum-service records and identify broken evidence links.",
+      "Audit this quantum job record without submitting or changing anything.",
+      "Explain which evidence is still missing before this result supports a claim."
+    ]
+  }
+}
